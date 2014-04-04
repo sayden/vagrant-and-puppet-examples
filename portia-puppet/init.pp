@@ -1,22 +1,43 @@
-class mean {
-	# Install Node
-	package {'node':
-		ensure => installed
-	}
+######## YUM Packages ########
 
-	# Install NPM (Node Package Manager)
-	package {'npm':
-		ensure => installed
-		require => Package['node']
-	}
+# Foundation packages
+package { 'gcc': ensure => installed }
+package { 'python': ensure => installed }
+package { 'git': ensure => installed }
 
-	# Install MongoDB
-	package {'mongodb':
-		ensure => installed
-	}
-
-	# Install Express
-	exec {'expressInstall':
-		require => [Package['npm'], Package['node']]
-	}
+# 3rd party packages
+package { 'python-pip':
+	ensure => installed,
+	require => Package['python']
 }
+
+package { 'python-devel':
+	ensure => installed,
+	require => Package['python']
+}
+
+package { 'twisted':
+	ensure => installed,
+	require => Package['python']
+}
+
+package { 'python-twisted-runner':
+	ensure => installed,
+	require => Package['python']
+}
+
+package { 'python-lxml':
+	ensure => installed,
+	require => Package['python']
+}
+
+package { 'python-virtualenv':
+	ensure => installed,
+	require => Package['python']
+}
+
+package {'python-jsonschema':
+	ensure => installed,
+	require => Package['python']
+}
+
