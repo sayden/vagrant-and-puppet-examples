@@ -9,7 +9,8 @@
 
 	### Configure MongoDB
 	exec {'configure-mongodb':
-		require => [Package['mongodb-server'], Exec['create-ddbb-folder']],
+		require => Package['mongodb-server'],
+		subscribe => Exec['create-ddbb-folder'],
 		command => '/bin/echo "smallfiles=true dbpath=/opt/mongodb" >> /etc/mongodb.conf'
 	}
 
@@ -21,7 +22,7 @@
 
 	### Download AngularJS
 	exec {'download-angularjs':
-		require => Package['wget'],
+		require => [Package['wget'],Exec['project-directory']],
 		command => "/usr/bin/wget 'https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js' -O /var/www/mean/public/js/angular.min.js",
 		creates => '/var/www/mean/public/js/angular.min.js'
 	}
