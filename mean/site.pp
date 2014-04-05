@@ -5,7 +5,7 @@
 	package {'wget': ensure => installed }						# Install wget	
 	package {'mongodb-server': ensure => installed }				# Install MongoDB
 	exec {'create-ddbb-folder': command => '/bin/mkdir /opt/mongodb' }		# Creates a folder for the mongodb ddbb
-	exec {'project-directory': command => "/bin/mkdir /var/www/mean/public/js"}	# Creates a folder for the project
+	exec {'project-directory': command => "/bin/mkdir -p /var/www/mean/public/js"}	# Creates a folder for the project
 
 	### Configure MongoDB
 	exec {'configure-mongodb':
